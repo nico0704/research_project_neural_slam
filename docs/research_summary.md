@@ -5,7 +5,7 @@ How NeRFs and 3D Gaussian Splatting are Reshaping SLAM: a Survey (https://arxiv.
 
 ---
  
-## General Goal of these algorithms: Generate dense, smooth maps of the environment using sparse LiDAR data.
+### General Goal of these algorithms: Generate dense, smooth maps of the environment using sparse LiDAR data.
 
 ---
 
