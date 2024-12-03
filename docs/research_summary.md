@@ -3,10 +3,9 @@
 ### Awesome Survey Paper on NeRF- and 3DGS-SLAM
 How NeRFs and 3D Gaussian Splatting are Reshaping SLAM: a Survey (https://arxiv.org/pdf/2402.13255)
 
-### **Why?**
-- **LiDAR Strength**: Accurate depth over long distances.  
-- **LiDAR Weakness**: Sparse data creates gaps in 3D representation.  
-- **Goal**: Generate dense, smooth maps of the environment using sparse LiDAR data.
+---
+ 
+**Goal**: Generate dense, smooth maps of the environment using sparse LiDAR data.
 
 ---
 
