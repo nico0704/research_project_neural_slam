@@ -1,6 +1,6 @@
 # Neural Implicit Lidar Based SLAM - Projekt Plan
 
-<img src="docs/images/neural_implicit_slam_project_plan.png" /><br><br>
+<img src="../images/neural_implicit_slam_project_plan.png" /><br><br>
 
 ## Phasenübersicht
 
@@ -144,3 +144,9 @@ ___________________________________
 - https://github.com/PRBonn/PIN_SLAM
 - https://github.com/naturerobots/mesh_navigation
 - https://github.com/naturerobots/mesh_navigation_tutorials
+
+### Awesome Github Repo for Implicit SLAMs and Navigation
+- https://github.com/DoongLi/awesome-Implicit-NeRF-SLAM
+
+### Awesome Survey Paper for NeRF and 3DGS SLAMs
+- https://arxiv.org/pdf/2402.13255
