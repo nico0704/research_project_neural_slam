@@ -91,7 +91,7 @@ Note: PIN-LO is the PIN-SLAM version with disabled loop closure detection correc
 #### **Speed and Memory Efficiency**
 - PIN-SLAM seems to be much more efficient than NeRF-LOAM with 7 GB of GPU running at 7 FPS
 - NeRF-LOAM requires 12 GB while running with 4 FPS
-- 
+- Still quite slow
 
 ---
 
