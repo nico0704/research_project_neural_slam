@@ -129,31 +129,31 @@ PIN-SLAM introduces a novel SLAM system leveraging a **Point-Based Implicit Neur
 
 ### **Pipeline Overview**
 1. **Preprocessing**:
-   - Input point cloud $ P $ is voxel-downsampled into:
-     - $ P_r $: Point cloud for registration.
-     - $ P_m $: Point cloud for mapping.
+   - Input point cloud P is voxel-downsampled into:
+     - $P_r$: Point cloud for registration.
+     - $P_m$: Point cloud for mapping.
 
 2. **Odometry**:
-   - Registers $ P_r $ to the implicit SDF of the current **local map $ M_l $** to estimate the global pose.
-   - Adds odometry transformation as an edge in the **pose graph $ G $**.
+   - Registers $P_r$ to the implicit SDF of the current **local map $M_l$** to estimate the global pose.
+   - Adds odometry transformation as an edge in the **pose graph $G$**.
 
 3. **Mapping**:
-   - Filters dynamic points in $P_m $ using the global map $M $.
-   - Samples along rays from the sensor to each point in $P_m $, generating training samples $D $.
-   - Initializes new neural points with close-to-surface samples $D_s \subset D $.
-   - Updates neural point features in $M_l $ using gradient descent with direct SDF supervision.
-   - Reallocates the updated $M_l $ back into the global map $M $.
+   - Filters dynamic points in $P_m $ using the global map $M$.
+   - Samples along rays from the sensor to each point in $P_m $, generating training samples $D$.
+   - Initializes new neural points with close-to-surface samples $D_s\subset D$.
+   - Updates neural point features in $M_l$ using gradient descent with direct SDF supervision.
+   - Reallocates the updated $M_l$ back into the global map $M$.
 
 4. **Loop Closure Detection**:
-   - Generates a **local polar context descriptor** $U_t $ from $M_l $.
+   - Generates a **local polar context descriptor** $U_t $ from $M_l$.
    - Searches for loop closures by comparing feature distances between $U_t $ and descriptors of previous frames.
-   - Verifies loop closure candidates by registering $P_r $ to the local map $M_l $ centered at the candidate frame’s position.
-   - Adds successful loop closure transformations as edges in the pose graph $G $.
+   - Verifies loop closure candidates by registering $P_r $ to the local map $M_l$ centered at the candidate frame’s position.
+   - Adds successful loop closure transformations as edges in the pose graph G.
 
 5. **Pose Graph Optimization**:
-   - Optimizes $G $ after adding loop closure edges.
-   - Updates the position and orientation of neural points in $M $ to maintain global consistency.
-   - Transforms the training sample pool $D_p $ and resets $M_l $ following loop correction.
+   - Optimizes G after adding loop closure edges.
+   - Updates the position and orientation of neural points in $M$ to maintain global consistency.
+   - Transforms the training sample pool $D_p$ and resets $M_l$ following loop correction.
 
 6. **Mesh Reconstruction**:
    - Queries SDF values at arbitrary positions for mesh generation during or post-SLAM using the **Marching Cubes Algorithm**.
