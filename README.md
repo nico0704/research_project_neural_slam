@@ -74,9 +74,9 @@ Den Algorithmus auf den Helm-Campus-Datensatz anwenden, Ergebnisse analysieren u
 Funktionierende Anwendung des SLAM-Algorithmus auf den Helm-Campus-Datensatz inkl. laufender Mesh-Navigation.
 
 #### First Experimental Results
-![hsfd_campus](../images/hsfd_campus_1.png)
-![hsfd_campus](../images/hsfd_campus_2.png)
-![hsfd_campus](../images/hsfd_campus_3.png)
+![hsfd_campus](images/hsfd_campus_1.png)
+![hsfd_campus](images/hsfd_campus_2.png)
+![hsfd_campus](images/hsfd_campus_3.png)
 
 ___________________________________
 
