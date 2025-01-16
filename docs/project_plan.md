@@ -73,11 +73,6 @@ Den Algorithmus auf den Helm-Campus-Datensatz anwenden, Ergebnisse analysieren u
 #### Meilenstein:
 Funktionierende Anwendung des SLAM-Algorithmus auf den Helm-Campus-Datensatz inkl. laufender Mesh-Navigation.
 
-#### First Experimental Results
-![hsfd_campus](../images/hsfd_campus_1.png)
-![hsfd_campus](../images/hsfd_campus_2.png)
-![hsfd_campus](../images/hsfd_campus_3.png)
-
 ___________________________________
 
 ### Phase 4: Prüfungsphase und leichte Arbeiten (04.02 - ca. 04.03, je nach Klausurterminen)
