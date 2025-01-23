@@ -75,8 +75,11 @@ Funktionierende Anwendung des SLAM-Algorithmus auf den Helm-Campus-Datensatz ink
 
 #### First Experimental Results
 ![hsfd_campus](images/hsfd_campus_1.png)
-![hsfd_campus](images/hsfd_campus_2.png)
+<!-- ![hsfd_campus](images/hsfd_campus_2.png) -->
 ![hsfd_campus](images/hsfd_campus_3.png)
+![hsfd_neural_map](images/hsfd_view_neural_map.png)
+![hsfd_view_col](images/hsfd_view_sem.png)
+![hsfd_view_plain](images/hsfd_view_plain.png)
 
 ___________________________________
 
