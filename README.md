@@ -85,7 +85,7 @@ python3 vis_pin_map.py ./experiments/hsfd_* -m 0.2 -c neural_points.ply -o mesh_
 
 ## Mesh Navigation on PIN-SLAM Mesh
 
-<video src=>https://github.com/user-attachments/assets/82847474-ac7a-4116-8e5c-aba9a2d2bd32</video>
+<video src=https://github.com/user-attachments/assets/82847474-ac7a-4116-8e5c-aba9a2d2bd32</video>
 
 ### Setup Mesh Navigation
 
