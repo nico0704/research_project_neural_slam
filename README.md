@@ -2,6 +2,7 @@
 
 ## HS Fulda Campus PIN-SLAM (8x Speed Up)
 <video src='https://github.com/user-attachments/assets/68c96a92-838b-49f9-b878-6d1f69a23948'></video>
+<video src='https://github.com/user-attachments/assets/666652a8-6276-4887-b945-692e47c2a296'></video>
 
 
 ## Table of Contents
