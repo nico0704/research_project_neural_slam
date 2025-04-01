@@ -13,7 +13,7 @@
 
 ## PIN-SLAM Advanced
 - [ ] Read paper again and understand
-- [ ] Document most important configs
+- [X] Document most important configs
 - [ ] Analysis of PIN-SLAM on hsfd: FPS, Mesh Quality, Hardware Util, PIN Map Size, Loop Closures, Time Details
 
 ## Presentation
