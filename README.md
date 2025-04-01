@@ -43,28 +43,28 @@ python3 rosbag2ply.py -i [path to input rosbag] -o [path to output folder] -t [t
 
 Edit the configuration file at `config/lidar_slam/run_hsfd.yaml`. Below is a breakdown of key parameters:
 
-- `min_range_m: 3.0`, `max_range_m: 80.0`: Filter out LiDAR points too close or too far.
+- `min_range_m: 3.0`, `max_range_m: 80.0`: Filter out LiDAR points too close (<3m) or too far (>80m), helping reduce noise and irrelevant data.
 
-* `surface_sample_range_m: 0.3`: Radius for sampling around surfaces.
-* `surface_sample_n: 4`: Samples per surface point.
-* `free_sample_begin_ratio: 0.5`, `free_sample_end_dist_m: 1.0`: Free space sampling settings.
-* `free_front_sample_n: 2`: Helps with dynamic object filtering.
+* `surface_sample_range_m: 0.3`: Radius around surface points to sample for SDF learning.
+* `surface_sample_n: 4`: Number of surface samples per measurement.
 
-- `voxel_size_m: 0.4`: Resolution of neural point map.
-- `search_alpha: 0.8`: Neighborhood size for querying.
+- `voxel_size_m: 0.4`: Size of voxel grid for neural point map – smaller = higher resolution.
+- `search_alpha: 0.8`: Controls neighborhood size during neural point querying (larger = more robust, slower).
 
-* `loss_weight_on: True`, `dist_weight_scale: 0.8`
-* `ekional_loss_on: True`, `weight_e: 0.5`
+* `loss_weight_on: True`: Enables distance-based weighting of loss.
+* `dist_weight_scale: 0.8`: Scales loss weight based on distance to reflect noise.
 
-- `batch_size_new_sample: 3000`
-- `pool_capacity: 1e7`
+- `batch_size_new_sample: 3000`: New samples added to training buffer per frame.
+- `pool_capacity: 1e7`: Max number of points in training data buffer.
 
-* `source_vox_down_m: 0.6`, `iter_n: 100`
-* `eigenvalue_check: False`, `GM_dist: 0.2`, `valid_nn_k: 5`
+* `source_vox_down_m: 0.6`: Downsample resolution for source point cloud used in tracking.
+* `iter_n: 100`: Max iterations for pose registration.
 
-- `map_context: True`, `pgo_freq_frame: 30`, `context_cosdist: 0.25`
+- `map_context: True`: Use local map descriptors for loop closure.
+ `pgo_freq_frame: 30`: Perform pose graph optimization every 30 frames.
 
-* `iters: 15`, `batch_size: 4096`
+* `iters: 15`: Mapping optimization iterations per frame.
+* `batch_size: 4096`: raining batch size per frame (big value = faster convergence but more VRAM needed).
 
 - `o3d_vis_on: False`, `mesh_freq_frame: 50`, `mesh_min_nn: 18`
 - `save_map: True`, `save_mesh: True`
