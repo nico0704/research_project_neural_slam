@@ -1,154 +1,124 @@
-# Neural Implicit Lidar Based SLAM - Research Project
+# Neural Implicit LiDAR-Based SLAM - Research Project
 
-<img src="images/neural_implicit_slam_project_plan.png" /><br><br>
-
-## Phasenübersicht
-
-1. Literaturrecherche und Algorithmusauswahl (26.11 - 03.12)
-2. Implementierung und Experimente mit Paper-Datensätzen (03.12 - 20.12)
-3. Tests mit Helm-Campus-Datensatz und Mesh-Navigation (07.01 - 04.02)
-4. Prüfungsphase und leichte Arbeiten (04.02 - ca. 04.03)
-5. Einarbeitung CityBot und SLAM-Integration (04.03 - 18.03)
-6. Auswertung und Dokumentation (18.03 - 31.03)
-
-## Plan
-
-### Phase 1: Literaturrecherche und Algorithmusauswahl (26.11 - 03.12)
-
-### Ziel: 
-Überblick über Neural Implicit Lidar SLAM gewinnen und den passenden Algorithmus auswählen.
-
-### Arbeitspakete:
-1. Literaturrecherche (8h)
-    - Recherche, was es für Paper in diesem Bereich gibt.
-
-2. Entscheidung für den Algorithmus (2h)
-    - Auswahl eines geeigneten SLAM-Algorithmus basierend auf Literatur und Github-Repo.
-    - Dokumentation der Wahl und Vorbereitung für Experimente.
-
-#### Meilenstein: 
-Auswahl eines geeigneten Algorithmus.
-
-___________________________________
-
-### Phase 2: Implementierung und Experimente mit Paper-Datensätzen (03.12 - 20.12)
-
-### Ziel: 
-Den gewählten Algorithmus mit Paper-Datensätzen testen und Überblick über den Code machen.
-
-### Arbeitspakete:
-1. Implementierung und Tests (15h)
-    - Setup des gewählten SLAM-Algorithmus (z.B. PIN-SLAM).
-    - Experimente mit Paper-Datensätzen aus der Veröffentlichung oder den jeweiligen Repositories.
-
-2. Erste Analyse der Ergebnisse (5h)
-    - Analyse der SLAM-Ergebnisse und Meshes.
-    - Identifikation von Stärken und Schwächen.
-
-#### Meilenstein:
-Algorithmus erfolgreich mit Paper-Datensätzen getestet und erste Erkenntnisse gesammelt.
-
-___________________________________
-
-### Phase 3: Tests mit eigenen Datensätzen und Mesh-Navigation (07.01 - 04.02)
-
-### Ziel: 
-Den Algorithmus auf den Helm-Campus-Datensatz anwenden, Ergebnisse analysieren und auf Basis des generierten Meshes navigieren.
-
-### Arbeitspakete:
-1. Vorbereitung eigener Daten (8h)
-    - Verarbeitung des Helm-Aufnahme-Datensatzes (Lidar- und Kameradaten).
-    - Sicherstellen, dass die Daten für den Algorithmus geeignet sind.
-    - Ggf. Preprocessing-Skripte schreiben.
-
-2. Algorithmustests mit eigenen Daten (12h)
-    - Anwendung des SLAM-Algorithmus auf den Helm-Campus-Datensatz.
-    - Vergleich der generierten Meshes mit den Ergebnissen der Autoren-Datensätze.
-
-3. Mesh-Navigation aus generierten Mesh (10h)
-    - Einarbeitung in Repo für Mesh-Navigation (z.B. https://github.com/naturerobots/mesh_navigation)
-    - Navigation auf Basis des generierten Meshes simulieren.
+<video controls>
+  <source src="assets/slam.mp4" type="video/mp4">
+</video>
 
 
-#### Meilenstein:
-Funktionierende Anwendung des SLAM-Algorithmus auf den Helm-Campus-Datensatz inkl. laufender Mesh-Navigation.
+## Table of Contents
 
-#### First Experimental Results
-![hsfd_campus](images/hsfd_campus_1.png)
-<!-- ![hsfd_campus](images/hsfd_campus_2.png) -->
-![hsfd_campus](images/hsfd_campus_3.png)
-![hsfd_neural_map](images/hsfd_view_neural_map.png)
-![hsfd_view_col](images/hsfd_view_sem.png)
-![hsfd_view_plain](images/hsfd_view_plain.png)
+- [PIN-SLAM](#pin-slam)
+  - [Setup](#setup-pin-slam)
+  - [Data Preparation](#get-data-for-hsfd-campus)
+  - [Configuration](#prepare-config)
+  - [Run Algorithm](#run-algorithm)
+  - [View Results](#view-results)
+- [Mesh Navigation](#mesh-navigation-on-pin-slam-mesh)
+  - [Setup](#setup-mesh-navigation)
+  - [Data Preparation](#prepare-data)
+  - [Run Navigation](#run-mesh-navigation)
+- [Links](#links)
 
-___________________________________
+---
 
-### Phase 4: Prüfungsphase und leichte Arbeiten (04.02 - ca. 04.03, je nach Klausurterminen)
+## PIN-SLAM
 
-### Ziel: 
-Dokumentationsentwurf und kleiner Fortschritt trotz Prüfungen.
+### Setup PIN-SLAM
 
-### Arbeitspakete:
-1. Hausmeistern (5h)
-    - bisherigen Code aufräumen
-    - README(s) für Installation, Setup, Ausführung, usw. schreiben
+```bash
+git clone git@github.com:PRBonn/PIN_SLAM.git
+cd PIN_SLAM
+conda create --name pin python=3.10
+conda activate pin
+conda install pytorch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 pytorch-cuda=11.8 -c pytorch -c nvidia
+pip3 install -r requirements.txt
+```
 
-2. Zwischenanalyse (5h)
-    - Bewertung der Ergebnisse und Identifikation von Verbesserungsmöglichkeiten.
+### Get Data for HSFD Campus
 
-3. Beginn der Dokumentation (5h)
-    - Grober Entwurf für die Dokumentation (Methodik, erste Ergebnisse).
+```bash
+python3 rosbag2ply.py -i [path to input rosbag] -o [path to output folder] -t [topic name]
+```
 
+### Prepare Config
 
-#### Meilenstein:
-Bisherigen Stand strukturiert festgehalten und Dokumentation begonnen.
+Edit the configuration file at `config/lidar_slam/run_hsfd.yaml`. Below is a breakdown of key parameters:
 
-___________________________________
+- `min_range_m: 3.0`, `max_range_m: 80.0`: Filter out LiDAR points too close or too far.
 
-### Phase 5: Einarbeitung CityBot und SLAM-Integration (04.03 - 18.03)
+* `surface_sample_range_m: 0.3`: Radius for sampling around surfaces.
+* `surface_sample_n: 4`: Samples per surface point.
+* `free_sample_begin_ratio: 0.5`, `free_sample_end_dist_m: 1.0`: Free space sampling settings.
+* `free_front_sample_n: 2`: Helps with dynamic object filtering.
 
-### Ziel: 
+- `voxel_size_m: 0.4`: Resolution of neural point map.
+- `search_alpha: 0.8`: Neighborhood size for querying.
 
-### Arbeitspakete:
-1. Einarbeitung in CityBot und Steuerung (15h)
-    - Analyse der bestehenden CityBot-Infrastruktur (Steuerungssoftware, Sensorik).
-    - Relevante Schnittstellen identifizieren.
+* `loss_weight_on: True`, `dist_weight_scale: 0.8`
+* `ekional_loss_on: True`, `weight_e: 0.5`
 
-2. SLAM-Integration in CityBot (20h)
-    - Anpassung des SLAM-Algorithus an die Infrastruktur des CityBots.
+- `batch_size_new_sample: 3000`
+- `pool_capacity: 1e7`
 
-3. Mesh-Navigation-Integration in CityBot (15h)
-    - Integration des Mesh-Navigation-Algorithmus in CityBot Code.
+* `source_vox_down_m: 0.6`, `iter_n: 100`
+* `eigenvalue_check: False`, `GM_dist: 0.2`, `valid_nn_k: 5`
 
-#### Meilenstein:
-Erfolgreiche Testfahrt des CityBots mit SLAM und Mesh-Navigation.
+- `map_context: True`, `pgo_freq_frame: 30`, `context_cosdist: 0.25`
 
-___________________________________
+* `iters: 15`, `batch_size: 4096`
 
-### Phase 6: Auswertung und Dokumentation (18.03 - 31.03)
+- `o3d_vis_on: False`, `mesh_freq_frame: 50`, `mesh_min_nn: 18`
+- `save_map: True`, `save_mesh: True`
 
-### Ziel: 
-Finalisierung des Algorithmus, Ergebnisse auswerten und Projektdokumentation abschließen.
+### Run Algorithm
 
-### Arbeitspakete:
-1. Finalisierung des Algorithmus (3h)
-    - READMEs schreiben
-    - Code und Setup-Scripts fertigstellen
+```bash
+python3 pin_slam.py config/lidar_slam/run_hsfd.yaml -vsm
+```
 
-2. Auswertung und Analyse (5h)
-    - Analyse der generierten Meshes + Navigation aus der Testfahrt
-    - Schlussfolgerungen zur Qualität des Algorithmus.
+### View Results
 
-3. Finale Dokumentation (12h)
-    - Vollständige Dokumentation der Methodik, Experimente und Ergebnisse.
-    - Erstellung eines Videos für Überblick über Projekt.
+```bash
+python3 vis_pin_map.py ./experiments/hsfd_* -m 0.2 -c neural_points.ply -o mesh_20cm.ply -n 8
+```
 
-#### Meilenstein:
-Abgabe der Projektdokumentation bis Ende März.
+---
 
-___________________________________
+## Mesh Navigation on PIN-SLAM Mesh
 
-### Links:
-- https://github.com/PRBonn/PIN_SLAM
-- https://github.com/naturerobots/mesh_navigation
-- https://github.com/naturerobots/mesh_navigation_tutorials
+### Setup Mesh Navigation
+
+```bash
+cd $YOUR_ROS_WS/src
+git clone git@github.com:naturerobots/mesh_navigation_tutorials.git
+vcs import --input mesh_navigation_tutorials/source_dependencies.yaml
+rosdep install --from-paths . --ignore-src -r -y
+cd $YOUR_ROS_WS
+colcon build --packages-up-to mesh_navigation_tutorials
+source install/setup.bash
+```
+
+### Prepare Data
+
+```bash
+chmod +x scripts/prepare_mesh_nav.sh
+./scripts/prepare_mesh_nav.sh
+```
+
+### Run Mesh Navigation
+
+```bash
+cd $YOUR_ROS_WS
+colcon build --packages-up-to mesh_navigation_tutorials
+source install/setup.bash
+ros2 launch mesh_navigation_tutorials mesh_navigation_tutorial_launch.py world_name:=hsfd
+```
+
+---
+
+## Links
+
+- [PIN-SLAM GitHub](https://github.com/PRBonn/PIN_SLAM)
+- [Mesh Navigation GitHub](https://github.com/naturerobots/mesh_navigation)
+- [Mesh Navigation Tutorials](https://github.com/naturerobots/mesh_navigation_tutorials)
+
