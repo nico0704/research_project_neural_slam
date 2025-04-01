@@ -1,8 +1,9 @@
 # Neural Implicit LiDAR-Based SLAM - Research Project
+<!-- 
+<video src="assets/slam.mp4" type="video/mp4">
+</video> -->
 
-<video controls>
-  <source src="assets/slam.mp4" type="video/mp4">
-</video>
+<video src='assets/slam.mp4'>
 
 
 ## Table of Contents
