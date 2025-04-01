@@ -1,5 +1,6 @@
 # Neural Implicit LiDAR-Based SLAM - Research Project
 
+## HS Fulda Campus PIN-SLAM (8x Speed Up)
 <video src='https://github.com/user-attachments/assets/68c96a92-838b-49f9-b878-6d1f69a23948'></video>
 
 
@@ -111,6 +112,8 @@ colcon build --packages-up-to mesh_navigation_tutorials
 source install/setup.bash
 ros2 launch mesh_navigation_tutorials mesh_navigation_tutorial_launch.py world_name:=hsfd
 ```
+
+![mesh_nav_overview](assets/mesh_nav_overview.png)
 
 ---
 
