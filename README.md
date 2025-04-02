@@ -26,7 +26,7 @@
 ### Setup PIN-SLAM
 
 ```bash
-git clone git@github.com:PRBonn/PIN_SLAM.git
+git clone https://github.com/nico0704/PIN_SLAM
 cd PIN_SLAM
 conda create --name pin python=3.10
 conda activate pin
